@@ -14,8 +14,10 @@ INSTALL:
 	
   You can download from the CPAN archive:
     http://www.cpan.org/modules/by-module/Term/
+
   or (when you use Debian GNU/Linux potato) simply type:
     apt-get install libansicolor-perl
+
   or (when you use Debian GNU/Linux woody or newer), it is in the
   perl-modules package.
 
@@ -29,3 +31,6 @@ EXAMPLES:
 
 TIPS:
   In TIPS file and in examples directory.
+
+ANOTHER TIP:
+  Use ccze by Gergely Nagy (mhp) http://bonehunter.rulez.org/CCZE.html

@@ -1,21 +1,22 @@
 #!/bin/bash
-# Init script to print color logs at any tty with any user
+# Init script to print color logs at any tty with any user and any shell
 #
-# Copyright(C) 2000, KARASZI Istvan, License under GPL version 2 or higher.
+# Copyright(C) 2003, KARASZI Istvan, License under GPL version 2 or higher.
 #
-# Version 0.3 -- Wed Jun 26 11:56:30 CEST 2002
+# Version 0.4 -- Fri Feb 21 23:14:51 CET 2003
 
 PATH="/bin/:/sbin/:/usr/sbin/:/usr/bin/";
 LOGFILES="/var/log/syslog /var/log/auth.log /var/log/messages";
 TTY="/dev/tty12";
-USER="root"
-NICE="19"
+USER="colorize";
+SHELL="/bin/bash";
+NICE="19";
 TAIL="/usr/bin/tail";
 COLORIZE="/usr/local/bin/colorize";
 PIDFILE="/var/run/colorize.pid";
 
 start () {
-	su $USER -c "$TAIL -q -c 0 --follow=name --retry $LOGFILES 2> /dev/null | nice -$NICE $COLORIZE > $TTY 2> /dev/null &"
+	su $USER -s $SHELL -c "$TAIL -q -c 0 --follow=name --retry $LOGFILES 2> /dev/null | nice -$NICE $COLORIZE > $TTY 2> /dev/null &"
 	PID=`pgrep -n -u $USER \`basename $TAIL\``;
 	if [ "$PID" != "" ]; then
 		echo $PID > $PIDFILE
