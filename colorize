@@ -504,7 +504,7 @@ while(<STDIN>) {
 		s/^<[0-9]+>//;
 	}
 
-	if (/^(>From)\s(\S+)(\s+)(.*)$/) {
+	if (/^(From)\s(\S+)(\s+)(.*)$/) {
 		# procmail log (from field)
 		$header = $1;
 		$mail = $2;
