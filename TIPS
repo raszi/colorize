@@ -7,7 +7,7 @@ syslog-ng.conf (part):
 	log { source(src); filter(f_cnews); destination(colorize); };
 	log { source(src); filter(f_cother); destination(colorize); };
 
-We need some system modifications (need root privileges):
+We need some system modifications (needs root privileges):
  # First we make a fifo
  mkfifo /dev/colorize
  # Setting permissions
@@ -23,6 +23,6 @@ syslog-ng.conf (part):
 	destination colorize { program("/usr/local/bin/colorize > /dev/tty12"); };
 	log { source(src); destination(colorize); }
 
-And that's all... (please check colorize path!)
+And that's all... (please always check PATH of colorize!)
 
-3.) You can found other tips (examples) under examples directory. 
+3.) You can find other tips (examples) under examples directory. 

@@ -1,3 +1,5 @@
 I wanna say thanks to these people for their patch:
 	- jamie <walkah@aci.on.ca>, for apache log fix (user bug)
-	- Scott Griffith <sgriffith@cypresstech.net> for color spray fix (resetcol bug)
+	- Scott Griffith <sgriffith@cypresstech.net> for color spray fix
+	  (resetcol bug)
+	- David Ranch <dranch@trinnet.net> for the documentation bugreport

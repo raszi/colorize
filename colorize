@@ -327,7 +327,7 @@ sub message {
 			elsif ($word =~ /^[a-z0-9-_]+@([a-z0-9-_\.]+)+(\.[a-z]{2,3})?$/) { $color="email"; }
 			elsif ($word =~ /^\w{2,}:\/\/(\S+\/?)+$/) { $color="uri"; }
 			elsif ($word =~ /^\d+(\.\d+)?[k|M|G]{1}B?(ytes?)?$/i) { $color="size"; }
-			elsif ($word =~ /^v?(\d+\.){1}((\d|[a-z])+\.)*(\d|[a-z])+$/) { $color="version"; }
+			elsif ($word =~ /^v?(\d+\.)((\d|[a-z])+\.)*(\d|[a-z])+$/) { $color="version"; }
 			elsif ($word =~ /^0x(\d|[a-f])+$/) { $color="address"; }
 			elsif (getservbyname($word, "")) { $color="service"; }
 			elsif (getprotobyname($word)) { $color="prot"; }

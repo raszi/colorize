@@ -1,26 +1,28 @@
 ABOUT:
-  This is a short (no, it's not short anymore :) perl  script  to  colorize'
+  This is a short (no, it's not short anymore :) perl  script to colorize'
   your logs. You can use your own colors, you can simply modify your config
-  file in your home directory, or system-wide (/etc/colorize).	Some  colors
-  are shit, 'cause i start the script on my sisters' mono vga  monitor.   If
-  you have a good "theme", i please you, to send me, and  i  will  put	into
-  tarball.
+  file in your home directory ($HOME), or system-wide (/etc/colorizerc).
+  Some colors are shit, 'cause I was developing the script on my sisters'
+  mono vga monitor. If you have a good "theme", I please you to send me,
+  and I will put into the tarball.
 
 INSTALL:
-  Put somewhere in your path.  Or just set the	PATH  environment  variable.
+  Put somewhere in your path. Or just set the PATH environment variable.
 
-  You will need a Perl module called Term::ANSIColor  by  Russ	Allbery  and
+  You will need a Perl module called Term::ANSIColor by Russ Allbery and
   Zenin (thanks for it).
 	
   You can download from the CPAN archive:
-    http://www.cpan.org/modules/by-module/Term/ ,
+    http://www.cpan.org/modules/by-module/Term/
   or (when you use Debian GNU/Linux potato) simply type:
     apt-get install libansicolor-perl
+  or (when you use Debian GNU/Linux woody or newer), it is in the
+  perl-modules package.
 
 USAGE:
   Just pipe the logs in the script, and	have fun.
 
-EXAMPLE:
+EXAMPLES:
   cat /var/log/daemon.log | colorize
   tail -0f /var/log/daemon.log /var/log/apache/access.log | colorize
   colorize < /var/log/messages
