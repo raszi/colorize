@@ -1,6 +1,7 @@
-I wanna say thanks to these people for their help:
+I want to say thanks to these people for their help:
 	- jamie <walkah@aci.on.ca>, for apache log fix (user bug)
 	- Scott Griffith <sgriffith@cypresstech.net> for color spray fix
 	  (resetcol bug)
 	- David Ranch <dranch@trinnet.net> for the documentation bugreport
 	- Oliver Sturm <oliver@sturmnet.org> for nocss patch
+	- Diego Torres <dtorres@coral.dnsalias.org> for finding a memory leak

@@ -4,7 +4,7 @@ use POSIX qw(strftime);
 use Getopt::Long;
 Getopt::Long::Configure("no_ignore_case");
 
-$main_version = "0.3.3-cvs";
+$main_version = "0.3.3";
 $scriptname = "colorize";
 
 # Copyright (C) 2000-2003, KARASZI 'raszi' Istvan
