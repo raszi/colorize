@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+ #!/usr/bin/perl -w
 use Term::ANSIColor;
 use POSIX qw(strftime);
 use Getopt::Long;
@@ -34,7 +34,7 @@ $default_output="STDOUT";
 # Default color
 $default_color="white";
 
-# Config file places (order is important, we will override the previous config's values)
+# Config file places (order is important, we will override the previous values of config)
 @config_files=("/etc/colorizerc", "$ENV{HOME}/.colorizerc");
 
 # Set all item to a default value
@@ -92,7 +92,7 @@ sub readconfig {
 	} else { return(2); }
 }
 
-# Print html's head with 'Cascading style sheets'
+# Print head of html with 'Cascading style sheets'
 sub printhtmlheader {
 	my($ccolor, $pre, $col, $back);
 
@@ -108,7 +108,7 @@ sub printhtmlheader {
 		$col=$9;
 		$back=$11;
 
-		# some rewrite here, 'cause ANSIColor's colors isn't equal to colors of css
+		# some rewrite here, 'cause ANSIColor's colors are not equal to colors of css
 		if ($col) {
 			$col =~ s/cyan/teal/;
 			$col =~ s/magenta/purple/;
@@ -186,7 +186,7 @@ sub fileopen {
 }
 
 sub isexists {
-	# Check, the file is exists or not
+	# Check the file is exists or not
 	# FIXME: if the file name is STDOUT or STDERR isexists return with 0
 	if (($file ne "STDOUT") and ($file ne "STDERR") and -e $file) { return(1); } else { return(0); }
 }
@@ -237,7 +237,7 @@ sub resetcol {
 sub space {
 	my $spaces=shift;
 
-	&resetcol();			# Reset the color, and write a space
+	&resetcol(); # Reset the color, and write a space
 	if (defined($spaces)) {
 		&printout($spaces);
 	} else {
@@ -414,7 +414,7 @@ undef(@config_files);
 print(STDERR "Can't read any configuration!"."\n") if ($noconfig);
 undef($noconfig);
 
-# Print out html header if file isn't exists and html switch is on
+# Print out html header if file is not exists and html switch is on
 &printhtmlheader() if (!$fileexists && $html);
 undef($fileexists);
 
@@ -512,7 +512,7 @@ while(<STDIN>) {
 			$msg=$2;
 		}
 
-		# If we know last message id, then we know what is the type of last message
+		# If we know last message id then we know what is the type of last message
 		# (it's send or received or something else)
 		if (defined($exim_last_uniqn) && defined($uniqn)) {
 			if ($exim_last_uniqn eq $uniqn) {
@@ -555,9 +555,9 @@ while(<STDIN>) {
 		$method=$8;		# method
 		$uri=$9;		# requested uri
 		$ident=$10;		# ident (disabled default, it's logged as "-")
-		$hierar=$11;	# hierarchy
+		$hierar=$11;		# hierarchy
 		$fhost=$12;		# from host
-		$content=$13;	# Content-type
+		$content=$13;		# Content-type
 
 		if ($convert_date) {
 			my $mydate=strftime("%b %e %T", gmtime($date));
@@ -622,18 +622,18 @@ while(<STDIN>) {
 
 		$date=$1;		# date of the event
 		$tag=$2;		# the event :)
-		$swapnum=$3;	# swap number
+		$swapnum=$3;		# swap number
 		$space1=$4;		# space between swap number and http reply code
 		$status=$5;		# http reply code
 		$hdate=$6;		# Time from the HTTP Date reply header
 		$space2=$7;		# space between hdate and lmdate
 		$lmdate=$8;		# last modification date
 		$space3=$9;		# space between lmdate and expire
-		$expire=$10;	# expire date
-		$content=$11;	# Content-type
-		$length=$12;	# Content-Length
+		$expire=$10;		# expire date
+		$content=$11;		# Content-type
+		$length=$12;		# Content-Length
 		$gsize=$13;		# actually readed bytes
-		$method=$14;	# the request method (GET, POST, etc).
+		$method=$14;		# the request method (GET, POST, etc).
 		$uri=$15;		# requested uri
 
 		if ($convert_date) {
@@ -690,7 +690,7 @@ while(<STDIN>) {
 		&printout($method);
 		&space();
 
-		&printcolor("uri");	# I dunno, maybe it must be same color with method (please FIXME with ideas)
+		&printcolor("uri"); # I dunno', maybe it must be same color with method (please FIXME with ideas)
 		&printout($uri);
 	}
 	elsif (/^(\d{4}\/\d{2}\/\d{2}\s(\d{2}:){2}\d{2}\|)\s(.*)$/) {
@@ -707,7 +707,7 @@ while(<STDIN>) {
 			&printdate($date);
 		}
 
-		&printcolor("debug");	# I think all cache.log message are debug level message
+		&printcolor("debug"); # I think all cache.log messages are debug level message
 		&printout($msg);
 	}
 	elsif (/^(\w{3}\s\w{3}\s+\d+\s\d{2}:\d{2}:\d{2}\s\d{4})(\s+)(\[[^\]]+\])(.*)$/) {
@@ -766,7 +766,7 @@ while(<STDIN>) {
 		&printout($other);
 	}
 	elsif (/^(\[\w{3}\s\w{3}\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}\s\d{4}\])\s(\[\w*\])\s(.*)$/) {
-		# httpd error.log format found
+		# httpd error.log format
 		my($date, $level, $msg, $color);
 
 		$date=$1;
@@ -788,7 +788,7 @@ while(<STDIN>) {
 		&printout($msg);
 	}
 	elsif (/^(\S{3}\s\S{3}\s{1,2}\S{1,2}\s\d{2}:\d{2}:\d{2}\s\d{4})\s(\d+)\s(\S+)\s(\d+)\s(\S+)\s(.*)/) {
-		# xferlog format found
+		# xferlog format
 		my($date, $time, $host, $gsiz, $gdir, $ftpc);
 
 		$date=$1;
@@ -876,4 +876,4 @@ while(<STDIN>) {
 	&printenter;
 }
 
-&quit;		# just reset color and quit
+&quit; # just reset color and quit
