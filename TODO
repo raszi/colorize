@@ -1,7 +1,7 @@
 *  complete
 !  half complete/not the best solution
--  whishlist item 
-?  i don't know
+-  whishlist item
+?  I don't know, maybe I don't want it
 
 TODO list:
 
@@ -16,5 +16,5 @@ TODO list:
 	- ipchains, iptables log
 	- make whole line one color (with switch)
 	? bell on some event (QUErot)
-	? only catch real ips (256.256.256.256 not!)
-	  with option (Andras and fu)	  
+	? only catch real ips (256.256.256.256 don't!)
+	  with option (Andras and fu)

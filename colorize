@@ -4,7 +4,7 @@ use POSIX qw(strftime);
 use Getopt::Long;
 Getopt::Long::Configure("no_ignore_case");
 
-$main_version = "0.3.3";
+$main_version = "0.3.4";
 $scriptname = "colorize";
 
 # Copyright (C) 2000-2003, KARASZI 'raszi' Istvan
@@ -24,6 +24,39 @@ $scriptname = "colorize";
 @bad_words = ("warn", "restart", "exit", "stop", "end", "shutting", "down", "close", "unreach", "can't", "cannot", "skip", "deny", "disable", "ignored", "miss", "oops", "su", "not", "backdoor", "blocking", "ignoring", "unable", "readonly", "offline", "bad");
 @error_words = ("error", "crit", "invalid", "fail", "false");
 @system_words = ("ext2-fs", "reiserfs", "vfs", "iso", "isofs", "cslip", "ppp", "bsd", "linux", "ip", "tcp/ip", "mtrr", "pci", "isa", "scsi", "ide", "atapi", "bios", "cpu", "fpu");
+# build regexps on the above words
+my $tmp = "^(?:" . join("|", @good_words) . ")";
+my $good_words_match = qr/$tmp/;
+$tmp = "^(?:" . join("|", @bad_words) . ")";
+my $bad_words_match = qr/$tmp/;
+$tmp = "^(?:" . join("|", @error_words) . ")";
+my $error_words_match = qr/$tmp/;
+$tmp = "^(?:" . join("|", @system_words) . ")";
+my $system_words_match = qr/$tmp/;
+
+# build caches for get{serv|proto|pw}ent results
+my %_protocols = ();
+while (my @ent = getprotoent) {
+	foreach (map { lc } @ent) {
+		# ignore numbers
+		next if /^(?:\d+)?$/;
+		$_protocols{$_} = 1;
+	}
+}
+my %_services = ();
+while (my @ent = getservent) {
+	foreach (map { lc } @ent) {
+		# ignore numbers or protocols
+		next if /^(?:\d+)?$/ or exists $_protocols{$_};
+		foreach (split / /) {
+			$_services{$_} = 1;
+		}
+	}
+}
+my %_users = ();
+while (my $ent = getpwent) {
+	$_users{lc($ent)} = 1;
+}
 
 # Item names
 @items = ("default", "unknown", "date", "host", "mac", "pid", "pid-sqbr", "get", "post", "head", "put", "connect", "httpcodes", "ftpcodes", "gettime", "getsize", "debug", "error", "warning", "bad", "good", "repeat", "process", "dir", "prot", "service", "email", "size", "version", "address", "uri", "miss", "parent", "direct", "hit", "deny", "ident", "refresh", "swapfail", "ctype", "clength", "create", "swapin", "swapout", "release", "swapnum", "hdate", "lmdate", "expired", "incoming", "outgoing", "user", "proxyfunction", "numbers", "system", "subject");
@@ -107,7 +140,7 @@ sub printhtmlheader {
 	foreach $ccolor(keys %color) {
 		&printout(".$ccolor { ") if (!$nocss);
 
-		$color{"$ccolor"} =~ /^(((bold)|(underline)|(underscore)|(blink)|(reverse)|(concealed))\s+)?(\w+)(\s+on_(\w+))?$/;
+		$color{$ccolor} =~ /^(((bold)|(underline)|(underscore)|(blink)|(reverse)|(concealed))\s+)?(\w+)(\s+on_(\w+))?$/;
 		$pre = $2;
 		$col = $9;
 		$back = $11;
@@ -124,9 +157,9 @@ sub printhtmlheader {
 
 		if ($nocss) {
 			if ($pre) {
-				$color_attrs{"$ccolor"}{"bold"} = (($pre =~ /bold/) ? 1:0);
-				$color_attrs{"$ccolor"}{"underline"} = (($pre =~ /underline/ || $pre =~ /underscore/) ? 1:0);
-				$color_attrs{"$ccolor"}{"blink"} = (($pre =~ /blink/) ? 1:0);
+				$color_attrs{$ccolor}{"bold"} = (($pre =~ /bold/) ? 1:0);
+				$color_attrs{$ccolor}{"underline"} = (($pre =~ /underline/ || $pre =~ /underscore/) ? 1:0);
+				$color_attrs{$ccolor}{"blink"} = (($pre =~ /blink/) ? 1:0);
 				if ($pre =~ /reverse/) {
 					my $x = $col;
 					$col = $back;
@@ -134,8 +167,8 @@ sub printhtmlheader {
 				}
 			}
 
-			$color_attrs{"$ccolor"}{"bgcolor"} = $back if ($back);
-			$color{"$ccolor"} = $col;
+			$color_attrs{$ccolor}{"bgcolor"} = $back if ($back);
+			$color{$ccolor} = $col;
 		} else {
 			&printout(".$ccolor { ");
 			if ($pre) {
@@ -195,14 +228,13 @@ sub printcolor {
 	$getcolor = shift(@_);
 
 	# Just a debug
-	$ncolor = $color{"$getcolor"};
+	$ncolor = $color{$getcolor};
 	print(STDERR "BUG, unknown color: $getcolor!"."\n") if (!defined($ncolor) or !$ncolor);
 	
-	%attr = %{$color_attrs{$getcolor}} if (defined ($color_attrs{$getcolor}) && $nocss);
-
 	if (!$html) {
-		eval("print(FILE color '$ncolor')");
+		print(FILE color $ncolor);
 	} else {
+		%attr = %{$color_attrs{$getcolor}} if (defined ($color_attrs{$getcolor}) && $nocss);
 		&endfont if ($font);
 		if ($nocss) {
 			if ($attr{"bold"}) {
@@ -251,9 +283,7 @@ sub fileclose {
 }
 
 sub printout {
-	my $line = shift;
-
-	print(FILE $line);
+	print FILE $_[0];
 }
 
 sub error {
@@ -377,31 +407,21 @@ sub message {
 			$color = "";
 
 			if ($word =~ /^(((\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|(([a-z0-9-_]+\.)+[a-z]{2,3})|(localhost)|(\w*::\w+)+)(:\d{1,5})?)$/) { $color = "host"; }
-			elsif ($word =~ /^([0-9a-f]{2}:){5}[0-9a-f]{2}$/i) { $color = "mac"; }
-			elsif ($word =~ /^\/(\S)+$/) { $color = "dir"; }
-			elsif ($word =~ /^[a-z0-9-_]+@([a-z0-9-_\.]+)+(\.[a-z]{2,3})?$/) { $color = "email"; }
+			elsif ($word =~ /^([0-9a-f]{2}:){5}[0-9a-f]{2}$/) { $color = "mac"; }
+			elsif ($word =~ /^\/\S+$/) { $color = "dir"; }
+			elsif ($word =~ /^[a-z0-9-_]+@[a-z0-9-_.]+(\.[a-z]{2,3})?$/) { $color = "email"; }
 			elsif ($word =~ /^\w{2,}:\/\/(\S+\/?)+$/) { $color = "uri"; }
-			elsif ($word =~ /^\d+(\.\d+)?[k|M|G]{1}B?(ytes?)?$/i) { $color = "size"; }
-			elsif ($word =~ /^v?(\d+\.)((\d|[a-z])+\.)*(\d|[a-z])+$/) { $color = "version"; }
-			elsif ($word =~ /^0x(\d|[a-f])+$/) { $color = "address"; }
-			elsif (getservbyname($word, "")) { $color = "service"; }
-			elsif (getprotobyname($word)) { $color = "prot"; }
-			elsif (defined(getpwnam($word))) { $color = "user"; }
+			elsif ($word =~ /^\d+(\.\d+)?[kmg]b?(ytes?)?$/) { $color = "size"; }
+			elsif ($word =~ /^v?\d+\.([0-9a-z]+\.)*[0-9a-z]+$/) { $color = "version"; }
+			elsif ($word =~ /^0x[0-9a-f]+$/) { $color = "address"; }
+			elsif (exists $_services{$word}) { $color = "service"; }
+			elsif (exists $_protocols{$word}) { $color = "prot"; }
+			elsif (exists $_users{$word}) { $color = "user"; }
 			elsif ($word =~ /^-?\d+$/) { $color = "numbers"; }
-			else {
-				for(my $i = 0; $i <= $#good_words; $i++) {
-					$color = "good" if ($word =~ /^$good_words[$i]/);
-				}
-				for(my $i = 0; $i <= $#bad_words; $i++) {
-					$color = "bad" if ($word =~ /^$bad_words[$i]/);
-				}
-				for(my $i = 0; $i <= $#error_words; $i++) {
-					$color = "error" if ($word =~ /^$error_words[$i]/);
-				}
-				for(my $i = 0; $i <= $#system_words; $i++) {
-					$color = "system" if ($word =~ /^$system_words[$i]/);
-				}
-			}
+			elsif ($word =~ $good_words_match) { $color = "good"; }
+			elsif ($word =~ $bad_words_match) { $color = "bad"; }
+			elsif ($word =~ $error_words_match) { $color = "error"; }
+			elsif ($word =~ $system_words_match) { $color = "system"; }
 
 			if ($color) {
 				&printcolor($color);
@@ -899,8 +919,8 @@ while(<STDIN>) {
 
 		if (defined($process)) {
 			if ($process =~ /\[(\d+)\]/) {
-				$process = $`;
 				$pid = $1;
+				$process = substr($process, 0, index($process, "[$pid]"));
 			}
 		&printcolor("process");
 		&printout($process);
