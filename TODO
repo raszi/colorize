@@ -13,6 +13,8 @@ TODO list:
 	- snort, ipchains, proftpd ([drewie])
 	- postfix log (mhp)
 	- iplog log (Mw3)
+	- ipchains, iptables log
+	- make whole line one color (with switch)
 	? bell on some event (QUErot)
 	? only catch real ips (256.256.256.256 not!)
 	  with option (Andras and fu)	  
