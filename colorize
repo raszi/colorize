@@ -4,7 +4,7 @@ use POSIX qw(strftime);
 use Getopt::Long;
 Getopt::Long::Configure("no_ignore_case");
 
-$main_version="0.3.1";
+$main_version="0.3.2-cvs";
 $scriptname="colorize";
 
 # Copyright (C) 2000-2002, KARASZI 'RASZi' Istvan
@@ -541,7 +541,7 @@ while(<STDIN>) {
 
 		&message($msg);
 	}
-	elsif (/^(\d{9}\.\d{3})(\s+)(\d+)\s(\S+)\s(\w+)\/(\d{3})\s(\d+)\s(\w+)\s(\S+)\s(\S+)\s(\w+)\/(\S+)\s(\S*)$/) {
+	elsif (/^(\d+\.\d{3})(\s+)(\d+)\s(\S+)\s(\w+)\/(\d{3})\s(\d+)\s(\w+)\s(\S+)\s(\S+)\s(\w+)\/(\S+)\s(\S*)$/) {
 		# Proxy access.log
 		my($date, $space, $elaps, $host, $action, $httpc, $gsize, $method, $uri, $ident, $hierar, $fhost, $content);
 
@@ -616,7 +616,7 @@ while(<STDIN>) {
 		&printcolor("ctype");
 		&printout($content);
 	}
-	elsif (/^(\d{9}\.\d{3})\s(\w+)\s(\w+)(\s+)\s(\d{3})\s(\d{9}|-1)(\s+)(\d{9}|-1)(\s+)(\d{9}|-1)\s(\S+)\s(-1|\d+)\/(\d+)\s(\w+)\s(\S+)$/) {
+	elsif (/^(\d+\.\d{3})\s(\w+)\s(\w+)(\s+)\s(\d{3})\s(\d{9}|-1)(\s+)(\d{9}|-1)(\s+)(\d{9}|-1)\s(\S+)\s(-1|\d+)\/(\d+)\s(\w+)\s(\S+)$/) {
 		# Proxy store.log
 		my($date, $tag, $swapnum, $space1, $status, $hdate, $space2, $lmdate, $space3, $expire, $content, $length, $gsize, $method, $uri);
 
