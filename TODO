@@ -1,0 +1,18 @@
+*  complete
+!  half complete/not the best solution
+-  whishlist item 
+?  i don't know
+
+TODO list:
+
+  	! FLUSH FLUSH FLUSH FLUSH!! (FILE->flush();)
+	* FIX! Exim log format
+	* convert unix timestamp to date format (toma)
+	* procmail log (Anh Lai)
+	* remove syslog facility number from output
+	- snort, ipchains, proftpd ([drewie])
+	- postfix log (mhp)
+	- iplog log (Mw3)
+	? bell on some event (QUErot)
+	? only catch real ips (256.256.256.256 not!)
+	  with option (Andras and fu)	  

@@ -1,0 +1,72 @@
+# Configuration file for colorize
+#
+# Available 'pre' attributes: bold, underline, underscore, blink, reverse, concealed
+# Available colors:  black, red, green, yellow, blue, magenta, cyan, white
+# Available bgcolors: on_black, on_red, on_green, on_yellow, on_blue, on_magenta, on_cyan, on_white
+#
+# You can also use item names in color definition, like:
+#
+# default   blue
+# date      'default'
+#
+# Here you defined default color to blue, and date color to default value's color, so
+# your date color is blue. (You can only use predefined item names!)
+
+# item          color                   # comment (what is color, or why it's that ;)
+
+default		cyan			# Default (not colorized strings) color
+unknown		'default'		# Unknown messages color
+date		bold cyan		# Color of the dates and times
+host		bold blue		# Color of IP numbers, and host names
+mac		bold white		# MAC address color
+pid		bold white		# Color of PID numbers
+pid-sqbr	bold green		# square brackets at PID numbers
+get		green			# Color of http GET messages
+post		bold green		# Color of http POST messages
+head		green			# Color of http HEAD messages
+put		bold green		# Color of http PUT messages
+connect		green			# Color of http CONNECT messages
+httpcodes	bold white		# Color of http codes (like 404)
+ftpcodes	cyan			# Color of ftp codes (xferlog)
+gettime		bold magenta		# Transfertime color (xferlog)
+getsize		magenta			# Size of transfer color (xferlog)
+debug		white			# Color of debug messages
+error		bold red		# Color of errors
+warning		red			# Color of warnings
+bad		bold yellow		# Color of "bad words"
+good		bold green		# Color of "good words"
+system		bold cyan		# Color of "system words"
+repeat		white			# Color of 'last message repeated N times'
+process		green			# Color of the sender process'es name
+dir		bold cyan		# Path, or filename with path color
+prot		magenta			# Colors of protocols (icmp, tcp, etc.)
+service		bold magenta		# Colors of services (ftp, telnet, etc.)
+email		bold green		# Color of e-mail addresses
+size		bold white		# Like 1.2M, 1024k, 2G
+version		bold white		# Color of version strings
+address		bold white		# Color of memory addresses
+uri		bold green		# Color of URIs (ftp://, http://, etc.)
+miss		red			# missing from cache color (proxy)
+parent		bold yellow		# hierarchy match with parent (proxy)
+direct		bold white		# hierarchy match with direct (proxy)
+hit		bold yellow		# is in cache color (proxy)
+deny		bold red		# denied host (proxy)
+ident		bold white		# ident color, disabled default (proxy)
+refresh		bold white		# no-cache refresh (proxy)
+swapfail	bold white		# swapfail color (proxy)
+ctype		white			# Content-type color (proxy)
+clength		white			# Content-length color (proxy)
+create		bold white		# Create tag in store.log (proxy)
+swapin		'create'		# swapin -"-
+swapout		'create'		# swapout -"-
+release		'create'		# release -"-
+swapnum		blue on_white		# swap number
+hdate		white			# time from the HTTP Date reply header
+lmdate		bold yellow		# last-modified date (proxy)
+expired		bold white		# expire date (proxy)
+proxyfunction	bold yellow		# proxy function (oops)
+incoming	bold white		# incoming mail color
+outgoing	white			# outgoing mail color
+user		bold yellow		# color of usernames
+numbers		white			# just numbers only
+subject		magenta			# subject of the mail

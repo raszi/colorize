@@ -1,0 +1,28 @@
+1.) Use with syslog-ng (or other syslog maybe):
+
+syslog-ng.conf (part):
+	# colorize destination
+	destination colorize { pipe("/dev/colorize"); };
+
+	log { source(src); filter(f_cnews); destination(colorize); };
+	log { source(src); filter(f_cother); destination(colorize); };
+
+We need some system modifications (need root privileges):
+ # First we make a fifo
+ mkfifo /dev/colorize
+ # Setting permissions
+ chmod 640 /dev/colorize && chown root.adm /dev/colorize
+ 
+ # And after all, we start colorize (user in adm group or root)
+ colorize < /dev/colorize > /dev/tty12
+
+2.) Or the other solution (Mw3's tip):
+
+syslog-ng.conf (part):
+	# My colorize
+	destination colorize { program("/usr/local/bin/colorize > /dev/tty12"); };
+	log { source(src); destination(colorize); }
+
+And that's all... (please check colorize path!)
+
+3.) You can found other tips (examples) under examples directory. 
