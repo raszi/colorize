@@ -1,25 +1,25 @@
 ABOUT:
-  This is a short (no, it's not short anymore :) perl  script to colorize'
-  your logs. You can use your own colors, you can simply modify your config
-  file in your home directory ($HOME), or system-wide (/etc/colorizerc).
-  Some colors are shit, 'cause I was developing the script on my sisters'
-  mono vga monitor. If you have a good "theme", I please you to send me,
-  and I will put into the tarball.
+  This is a perl script to colorize your logs. Useful for system administrators
+  to check daily logs, it will highlight the important parts of every log line.
+
+  It uses coherent colors for every log formats which is pretty cool but you
+  can use your own colors by modifying the configuration file in your home
+  directory (~/.colorizerc) or system-wide (/etc/colorizerc).
 
 INSTALL:
-  Put somewhere in your path. Or just set the PATH environment variable.
+  Put somewhere in your path or set the PATH environment variable.
 
-  You will need a Perl module called Term::ANSIColor by Russ Allbery and
-  Zenin (thanks for it).
+  You will need to install the Term::ANSIColor Perl module by Russ Allbery and
+  Zenin to use this script.
 	
   You can download from the CPAN archive:
     http://www.cpan.org/modules/by-module/Term/
 
-  or (when you use Debian GNU/Linux potato) simply type:
-    apt-get install libansicolor-perl
+  or under Debian GNU/Linux:
+    apt-get install perl-modules
 
-  or (when you use Debian GNU/Linux woody or newer), it is in the
-  perl-modules package.
+  or under Gentoo:
+    emerge -vta perl-core/Term-ANSIColor
 
 USAGE:
   Just pipe the logs in the script, and	have fun.
@@ -30,7 +30,4 @@ EXAMPLES:
   colorize < /var/log/messages
 
 TIPS:
-  In TIPS file and in examples directory.
-
-ANOTHER TIP:
-  Use ccze by Gergely Nagy (mhp) http://bonehunter.rulez.org/CCZE.html
+  In the TIPS file and in the examples directory.

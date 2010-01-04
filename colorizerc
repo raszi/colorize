@@ -70,3 +70,5 @@ outgoing	white			# outgoing mail color
 user		bold yellow		# color of usernames
 numbers		white			# just numbers only
 subject		magenta			# subject of the mail
+
+# vim: ts=8:sw=8

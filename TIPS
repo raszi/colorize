@@ -8,8 +8,10 @@ syslog-ng.conf (part):
 	log { source(src); filter(f_cother); destination(colorize); };
 
 We need some system modifications (needs root privileges):
+
  # First we make a fifo
  mkfifo /dev/colorize
+
  # Setting permissions
  chmod 640 /dev/colorize && chown root.adm /dev/colorize
  

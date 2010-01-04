@@ -956,3 +956,5 @@ while(<STDIN>) {
 }
 
 &quit; # just reset color and quit
+
+# vim: ts=4:sw=4
