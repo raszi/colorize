@@ -9,9 +9,11 @@ directory (~/.colorizerc) or system-wide (/etc/colorizerc).
 
 ## Install ##
 
-Put somewhere in your path or set the PATH environment variable.
+```shell
+make install
+```
 
-You will need to install the Term::ANSIColor Perl module by Russ Allbery and
+You will also need to install the Term::ANSIColor Perl module by Russ Allbery and
 Zenin to use this script.
 	
 ### Manual ###
