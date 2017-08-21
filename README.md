@@ -22,7 +22,7 @@ brew install raszi/tap/colorize
 
 ### FreeBSD ###
 
-It is in the [ports][2].
+It is in the [ports][2], you can install with any preferred way.
 
 ### Manual ###
 
