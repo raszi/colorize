@@ -230,7 +230,7 @@ sub printcolor {
 	# Just a debug
 	$ncolor = $color{$getcolor};
 	print(STDERR "BUG, unknown color: $getcolor!"."\n") if (!defined($ncolor) or !$ncolor);
-	
+
 	if (!$html) {
 		print(FILE color $ncolor);
 	} else {
@@ -253,7 +253,7 @@ sub printcolor {
 		}
 		else {
 			&printout('<font class="'.$getcolor.'">');
-		}	
+		}
 
 		$font = 1;
 	}
@@ -513,14 +513,14 @@ while(<STDIN>) {
 
 		&printcolor("default");
 		&printout($header);
-		
+
 		&space();
-		
+
 		&printcolor("email");
 		&printout($mail);
-		
+
 		&space($space);
-		
+
 		&printdate($date);
 	}
 	elsif (/^\s(Subject:)\s(.*)$/) {
@@ -529,7 +529,7 @@ while(<STDIN>) {
 		$subject = $2;
 
 		&space();
-		
+
 		&printcolor("default");
 		&printout($header);
 
