@@ -1,42 +1,56 @@
 ## About ##
 
-This is a perl script to colorize your logs. Useful for system administrators
-to check daily logs, it will highlight the important parts of every log line.
+This is a perl script to colorize your logs. Useful for system administrators to check daily logs, it will highlight the important parts of every log line.
 
-It uses coherent colors for every log formats which is pretty cool but you
-can use your own colors by modifying the configuration file in your home
-directory (~/.colorizerc) or system-wide (/etc/colorizerc).
+It uses coherent colors for every log formats which is pretty cool but you can use your own colors by modifying the configuration file in your home directory (~/.colorizerc) or system-wide (/etc/colorizerc).
 
 ## Install ##
 
+### MacOS ###
+
+Install my tap from [raszi/homebrew-tap][3] with the following command:
+
 ```shell
-make install
+brew tap raszi/tap
 ```
 
-You will also need to install the Term::ANSIColor Perl module by Russ Allbery and
-Zenin to use this script.
-	
+Then install the formula with:
+
+```shell
+brew install raszi/tap/colorize
+```
+
+### FreeBSD ###
+
+It is in the [ports][2].
+
 ### Manual ###
 
-You can download from the CPAN archive:
+#### Dependencies ####
 
-http://www.cpan.org/modules/by-module/Term/
+This script depends on [Term::ANSIColor][1], so you will need to install it first.
 
-### Debian GNU/Linux ###
+Under Debian GNU/Linux:
 
 ```shell
 apt-get install perl-modules
 ```
 
-### Gentoo ###
+Gentoo:
 
 ```shell
 emerge -vta perl-core/Term-ANSIColor
 ```
 
+#### Installing the script ####
+
+```shell
+make install
+```
+
 ## Usage ##
 
-Just pipe the logs in the script, and	have fun.
+Just pipe the logs in the script, and have fun.
 
 ## Examples ##
 
@@ -49,3 +63,7 @@ colorize < /var/log/messages
 ## Tips ##
 
 In the TIPS file and in the examples directory.
+
+[1]: http://search.cpan.org/perldoc/Term::ANSIColor
+[2]: http://svnweb.freebsd.org/ports/head/sysutils/colorize
+[3]: https://github.com/raszi/homebrew-tap
