@@ -1,4 +1,5 @@
-ABOUT:
+## About ##
+
   This is a perl script to colorize your logs. Useful for system administrators
   to check daily logs, it will highlight the important parts of every log line.
 
@@ -6,7 +7,8 @@ ABOUT:
   can use your own colors by modifying the configuration file in your home
   directory (~/.colorizerc) or system-wide (/etc/colorizerc).
 
-INSTALL:
+## Install ##
+
   Put somewhere in your path or set the PATH environment variable.
 
   You will need to install the Term::ANSIColor Perl module by Russ Allbery and
@@ -21,13 +23,16 @@ INSTALL:
   or under Gentoo:
     emerge -vta perl-core/Term-ANSIColor
 
-USAGE:
+## Usage ##
+
   Just pipe the logs in the script, and	have fun.
 
-EXAMPLES:
+## Examples ##
+
   cat /var/log/daemon.log | colorize
   tail -0f /var/log/daemon.log /var/log/apache/access.log | colorize
   colorize < /var/log/messages
 
-TIPS:
+## Tips ##
+
   In the TIPS file and in the examples directory.
