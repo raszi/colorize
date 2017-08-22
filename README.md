@@ -50,6 +50,12 @@ Gentoo:
 emerge -vta perl-core/Term-ANSIColor
 ```
 
+Mageia:
+
+```shell
+urpmi perl-Term-ANSIColor
+```
+
 #### Installing the script ####
 
 ```shell
