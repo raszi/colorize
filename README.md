@@ -24,6 +24,14 @@ brew install raszi/tap/colorize
 
 It is in the [ports][2], you can install with any preferred way.
 
+### Mageia (Linux) ###
+
+It is in the [repositories][4], you can install as root with:
+
+```shell
+urpmi colorize
+```
+
 ### Manual ###
 
 #### Dependencies ####
@@ -67,3 +75,4 @@ In the TIPS file and in the examples directory.
 [1]: http://search.cpan.org/perldoc/Term::ANSIColor
 [2]: http://svnweb.freebsd.org/ports/head/sysutils/colorize
 [3]: https://github.com/raszi/homebrew-tap
+[4]: http://madb.mageia.org/package/show/application/0/name/colorize
