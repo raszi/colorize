@@ -2,7 +2,7 @@
 
 This is a perl script to colorize your logs. Useful for system administrators to check daily logs, it will highlight the important parts of every log line.
 
-It uses coherent colors for every log formats which is pretty cool but you can use your own colors by modifying the configuration file in your home directory (~/.colorizerc) or system-wide (/etc/colorizerc).
+It uses coherent colors for every log formats which is pretty cool but you can use your own colors by modifying the configuration file in your home directory (`~/.colorizerc`) or system-wide (`/etc/colorizerc`).
 
 ## Install ##
 
