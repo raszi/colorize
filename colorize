@@ -7,10 +7,7 @@ Getopt::Long::Configure("no_ignore_case");
 $main_version = "0.3.4";
 $scriptname = "colorize";
 
-# Copyright (C) 2000-2003, KARASZI 'raszi' Istvan
-#                          <colorize@spam.raszi.hu>
-#                          http://colorize.raszi.hu/
-#                          http://freshmeat.net/colorize.pl/
+# Copyright (C) 2000-2017, KARASZI Istvan <github@spam.raszi.hu>
 #
 # Released under GPL version 2 or higher,
 # http://www.gnu.org/copyleft/gpl.html
