@@ -1,12 +1,12 @@
-## About ##
+## About
 
 This is a perl script to colorize your logs. Useful for system administrators to check daily logs, it will highlight the important parts of every log line.
 
 It uses coherent colors for every log formats which is pretty cool but you can use your own colors by modifying the configuration file in your home directory (`~/.colorizerc`) or system-wide (`/etc/colorizerc`).
 
-## Install ##
+## Installation
 
-### MacOS ###
+### MacOS
 
 Install my tap from [raszi/homebrew-tap][3] with the following command:
 
@@ -20,11 +20,11 @@ Then install the formula with:
 brew install raszi/tap/colorize
 ```
 
-### FreeBSD ###
+### FreeBSD
 
 It is in the [ports][2], you can install with any preferred way.
 
-### Mageia (Linux) ###
+### Mageia (Linux)
 
 It is in the [repositories][4], you can install as root with:
 
@@ -32,9 +32,9 @@ It is in the [repositories][4], you can install as root with:
 urpmi colorize
 ```
 
-### Manual ###
+### Manual
 
-#### Dependencies ####
+#### Dependencies
 
 This script depends on [Term::ANSIColor][1], so you will need to install it first.
 
@@ -56,17 +56,17 @@ Mageia:
 urpmi perl-Term-ANSIColor
 ```
 
-#### Installing the script ####
+#### Installing the script
 
 ```shell
 make install
 ```
 
-## Usage ##
+## Usage
 
 Just pipe the logs in the script, and have fun.
 
-## Examples ##
+## Examples
 
 ```shell
 cat /var/log/daemon.log | colorize
@@ -74,7 +74,7 @@ tail -0f /var/log/daemon.log /var/log/apache/access.log | colorize
 colorize < /var/log/messages
 ```
 
-## Tips ##
+## Tips
 
 In the TIPS file and in the examples directory.
 
