@@ -1,3 +1,5 @@
+# Colorize
+
 ## About
 
 This is a perl script to colorize your logs. Useful for system administrators to check daily logs, it will highlight the important parts of every log line.
