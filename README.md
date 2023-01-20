@@ -2,7 +2,11 @@
 
 ## About
 
-This is a perl script to colorize your logs. Useful for system administrators to check daily logs, it will highlight the important parts of every log line.
+Colorize is a powerful and versatile Perl script to colorize your logs. With support for multiple log formats and customizable color schemes, this tool makes it simple to highlight important information and pinpoint problem areas, while also making the logs more visually appealing.
+
+It was one of the first solutions of this kind and it inspired the development of other similar tools, such as [CCZE](https://github.com/cornet/ccze).
+
+Although the project is not actively maintained, it still works without issues and it can be useful for those who are looking for a similar solution. Whether you're a system administrator monitoring daily logs or a developer debugging a complex application, colorize is an essential tool for anyone who wants to make sense of their log data in a fast and efficient way, while also enjoying the nice look of the colorized output.
 
 ### Example Screenshot
 
